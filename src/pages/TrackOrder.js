@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { API_URL as BASE_URL } from '../config';
 const API_URL = `${BASE_URL}/api/orders`;
 const steps = ['Placed', 'Shipped', 'Delivered'];
