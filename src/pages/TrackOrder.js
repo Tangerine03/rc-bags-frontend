@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { API_URL as BASE_URL } from '../config';
 const API_URL = `${BASE_URL}/api/orders`;
 const steps = ['Placed', 'Shipped', 'Delivered'];
@@ -14,8 +13,9 @@ function TrackOrder() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (queryId) handleSearch(null, queryId);
-  }, [queryId]);
+  if (queryId) handleSearch(null, queryId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [queryId]);
 
   function handleSearch(e, idOverride) {
     if (e) e.preventDefault();

@@ -85,18 +85,18 @@ function AdminOrders() {
             </div>
 
             <div className="admin-order-products">
-              {order.items.map((item, i) => (
-                <div className="admin-order-product-row" key={i}>
-                  <img src={item.image} alt={item.name} className="admin-order-thumb" />
-                  <div className="admin-order-product-info">
-                    <p className="admin-order-product-name">{item.name}</p>
-                    <p className="admin-order-product-meta">
-                      Qty: {item.qty} · Price each: ₹{item.price} · Subtotal: ₹{item.price * item.qty}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+  {order.items.map((item, i) => (
+    <Link to={`/product/${item.productId}`} className="admin-order-product-row admin-order-product-link" key={i}>
+      <img src={item.image} alt={item.name} className="admin-order-thumb" />
+      <div className="admin-order-product-info">
+        <p className="admin-order-product-name">{item.name}</p>
+        <p className="admin-order-product-meta">
+          Qty: {item.qty} · Price each: ₹{item.price} · Subtotal: ₹{item.price * item.qty}
+        </p>
+      </div>
+    </Link>
+  ))}
+</div>
 
             <div className="admin-order-actions">
               <label>Update Status:</label>
