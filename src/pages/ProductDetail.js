@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../CartContext';
 import { API_URL as BASE_URL } from '../config';
+import { getImageUrl } from '../utils/imageUrl';
 
 const API_URL = `${BASE_URL}/api/products`;
 
@@ -98,7 +99,7 @@ function ProductDetail() {
     const res = await fetch(`${BASE_URL}/api/upload`, { method: 'POST', body: formData });
     if (!res.ok) throw new Error('Upload failed.');
     const data = await res.json();
-    return `${BASE_URL}${data.urls[0]}`;
+    return getImageUrl(data.urls[0]);
   }
 
   async function handleReviewSubmit(e) {
@@ -179,7 +180,7 @@ function ProductDetail() {
   return (
     <div className="product-detail">
       <div className="gallery" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        <img src={`${BASE_URL}${bag.images[current]}`} alt={bag.name} className="gallery-image" />
+        <img src={getImageUrl(bag.images[current])} alt={bag.name} className="gallery-image" />
         {bag.images.length > 1 && (
           <>
             <button className="gallery-arrow gallery-prev" onClick={prevImage}>‹</button>
@@ -211,7 +212,7 @@ function ProductDetail() {
       <p>Warranty: {bag.warranty}</p>
 
       <button onClick={() => {
-        addToCart({ ...bag, id: bag._id, images: bag.images.map(img => `${BASE_URL}${img}`) });
+        addToCart({ ...bag, id: bag._id, images: bag.images.map((img) => getImageUrl(img)) });
         setShowToast(true);
         setTimeout(() => setShowToast(false), 2000);
       }}>

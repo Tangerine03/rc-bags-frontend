@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL as BASE_URL } from '../config';
+import { getImageUrl } from '../utils/imageUrl';
 
 const API_URL = `${BASE_URL}/api/products`;
 
@@ -112,14 +113,14 @@ function Shop() {
             bag.stock > 0 ? (
               <Link to={`/product/${bag._id}`} key={bag._id} className="product-link">
                 <div className="product-card">
-                  <img src={`${BASE_URL}${bag.images[0]}`} alt={bag.name} />
+                  <img src={getImageUrl(bag.images[0])} alt={bag.name} />
                   <h3>{bag.name}</h3>
                   <p>₹{bag.price}</p>
                 </div>
               </Link>
             ) : (
               <div className="product-card out-of-stock" key={bag._id}>
-                <img src={`${BASE_URL}${bag.images[0]}`} alt={bag.name} />
+                <img src={getImageUrl(bag.images[0])} alt={bag.name} />
                 <h3>{bag.name}</h3>
                 <p className="out-of-stock-text">Out of Stock</p>
               </div>

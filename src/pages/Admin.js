@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AdminNav from '../components/AdminNav';
 import { API_URL as BASE_URL } from '../config';
+import { getImageUrl } from '../utils/imageUrl';
 
 const API_URL = `${BASE_URL}/api/products`;
 const UPLOAD_URL = `${BASE_URL}/api/upload`;
@@ -277,7 +278,7 @@ function Admin() {
           {editingId && existingImages.length > 0 && selectedFiles.length === 0 && (
             <div className="image-preview-row">
               {existingImages.map((src, index) => (
-                <img key={index} src={`${BASE_URL}${src}`} alt={`current-${index}`} className="admin-thumb" />
+                <img key={index} src={getImageUrl(src)} alt={`current-${index}`} className="admin-thumb" />
               ))}
             </div>
           )}
@@ -315,7 +316,7 @@ function Admin() {
         <div className="admin-product-list">
           {products.map((p) => (
             <div className="admin-product-card" key={p._id}>
-              <img src={`${BASE_URL}${p.images[0]}`} alt={p.name} className="admin-thumb" />
+              <img src={getImageUrl(p.images[0])} alt={p.name} className="admin-thumb" />
               <div className="admin-product-info">
                 <p className="admin-product-name">{p.name}</p>
                 <p className="admin-product-meta">{p.category} · {p.color} · ₹{p.price} · Stock: {p.stock}</p>
