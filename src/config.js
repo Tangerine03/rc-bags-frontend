@@ -1,0 +1,1 @@
+export const API_URL = 'https://rc-bags-backend.onrender.com';
